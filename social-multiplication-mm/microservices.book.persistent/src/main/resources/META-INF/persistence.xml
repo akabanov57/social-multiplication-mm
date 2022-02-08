@@ -4,12 +4,15 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
   <persistence-unit name="multiplication" transaction-type="RESOURCE_LOCAL">
+    <!-- PersistenceProvider will be selected from those available in classPath. See tests.
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    -->
     <class>microservices.book.impl.services.persistent.UserE</class>
     <class>microservices.book.impl.services.persistent.MultiplicationAttemptE</class>
     <class>microservices.book.impl.services.persistent.UUIDConverter</class>
     <class>microservices.book.impl.services.persistent.Persistent</class>
     <properties>
+      <!-- see microservices.book.impl.services.persistent.DatabaseEclipseLinkXXXXTest
       <property name="javax.persistence.jdbc.url" value="jdbc:pgsql://pgsrv:5432/multiplication" />
       <property name="javax.persistence.jdbc.user" value="postgres" />
       <property name="javax.persistence.jdbc.password" value="postgres" />
@@ -18,6 +21,7 @@
       <property name="eclipselink.target-database" value="org.eclipse.persistence.platform.database.PostgreSQLPlatform" />
       <property name="eclipselink.jdbc.batch-writing" value="jdbc" />
       <property name="eclipselink.jdbc.batch-writing.size" value="150" />
+      -->
     </properties>
   </persistence-unit>
 </persistence>

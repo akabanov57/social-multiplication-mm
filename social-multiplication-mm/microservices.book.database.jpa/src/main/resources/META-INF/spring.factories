@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+microservices.book.database.jpa.DatabaseConfiguration

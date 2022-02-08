@@ -14,68 +14,67 @@ import microservices.book.api.domain.MultiplicationAttempt;
 @Entity
 @Table(name = "multiplication_attempt")
 @NamedQuery(name = "SELECT_ALL_ATTEMPTS", query = "SELECT a FROM MultiplicationAttemptE a")
-class MultiplicationAttemptE extends Persistent {
+public class MultiplicationAttemptE extends Persistent {
 
-    @Column(name = "factor_a", nullable = false)
-    private int factorA;
+  @Column(name = "factor_a", nullable = false)
+  private int factorA;
 
-    @Column(name = "factor_b", nullable = false)
-    private int factorB;
+  @Column(name = "factor_b", nullable = false)
+  private int factorB;
 
-    @Column(nullable = false)
-    private int result;
+  @Column(nullable = false, name = "multiplication_result")
+  private int result;
 
-    @Column(nullable = false)
-    private boolean correct;
+  @Column(nullable = false)
+  private boolean correct;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private UserE user;
+  @ManyToOne
+  @JoinColumn(name = "user_id", referencedColumnName = "id")
+  private UserE user;
 
-    MultiplicationAttemptE(int factorA, int factorB, int result, boolean correct) {
-        id = null;
-        this.factorA = factorA;
-        this.factorB = factorB;
-        this.result = result;
-        this.correct = correct;
-        user = null;
-    }
+  MultiplicationAttemptE(int factorA, int factorB, int result, boolean correct) {
+    id = null;
+    this.factorA = factorA;
+    this.factorB = factorB;
+    this.result = result;
+    this.correct = correct;
+    user = null;
+  }
 
-    protected MultiplicationAttemptE() {
-        this(-1, -1, -1, false);
-    }
+  protected MultiplicationAttemptE() {
+    this(-1, -1, -1, false);
+  }
 
-    static MultiplicationAttemptE from(MultiplicationAttempt attempt, boolean correct) {
-        Objects.requireNonNull(attempt, "attempt is null.");
-        return new MultiplicationAttemptE(
-                attempt.getMultiplication().getFactorA(),
-                attempt.getMultiplication().getFactorB(),
-                attempt.getResult(),
-                correct);
-    }
+  public static MultiplicationAttemptE from(MultiplicationAttempt attempt, boolean correct) {
+    Objects.requireNonNull(attempt, "attempt is null.");
+    return new MultiplicationAttemptE(
+        attempt.getMultiplication().getFactorA(),
+        attempt.getMultiplication().getFactorB(),
+        attempt.getResult(),
+        correct);
+  }
 
-    UserE getUser() {
-        return user;
-    }
+  public UserE getUser() {
+    return user;
+  }
 
-    void setUser(UserE user) {
-        this.user = user;
-    }
+  public void setUser(UserE user) {
+    this.user = user;
+  }
 
-    int getFactorA() {
-        return factorA;
-    }
+  public int getFactorA() {
+    return factorA;
+  }
 
-    int getFactorB() {
-        return factorB;
-    }
+  public int getFactorB() {
+    return factorB;
+  }
 
-    int getResult() {
-        return result;
-    }
+  public int getResult() {
+    return result;
+  }
 
-    boolean isCorrect() {
-        return correct;
-    }
-
+  public boolean isCorrect() {
+    return correct;
+  }
 }

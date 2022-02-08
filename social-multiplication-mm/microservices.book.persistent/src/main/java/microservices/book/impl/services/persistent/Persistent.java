@@ -11,24 +11,24 @@ import com.fasterxml.uuid.Generators;
 import com.fasterxml.uuid.impl.TimeBasedGenerator;
 
 @MappedSuperclass
-abstract class Persistent {
+public abstract class Persistent {
 
-    private static final TimeBasedGenerator generator = Generators.timeBasedGenerator();
+  private static final TimeBasedGenerator generator = Generators.timeBasedGenerator();
 
-    @Id
-    @Column(updatable = false, unique = true, nullable = false)
-    protected UUID id;
+  @Id
+  @Column(updatable = false, unique = true, nullable = false)
+  protected UUID id;
 
-    protected Persistent() {
-        id = null;
-    }
+  protected Persistent() {
+    id = null;
+  }
 
-    @PrePersist
-    void genId() {
-        id = generator.generate();
-    }
+  @PrePersist
+  void genId() {
+    id = generator.generate();
+  }
 
-    UUID getId() {
-        return id;
-    }
+  public UUID getId() {
+    return id;
+  }
 }

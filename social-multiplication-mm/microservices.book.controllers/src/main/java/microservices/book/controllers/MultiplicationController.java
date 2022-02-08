@@ -12,15 +12,15 @@ import microservices.book.api.services.multiplication.MultiplicationService;
 @RequestMapping("/multiplications")
 final class MultiplicationController {
 
-    private final MultiplicationService multiplicationService;
+  private final MultiplicationService multiplicationService;
 
-    @Autowired
-    public MultiplicationController(final MultiplicationService multiplicationService) {
-        this.multiplicationService = multiplicationService;
-    }
+  @Autowired
+  MultiplicationController(final MultiplicationService multiplicationService) {
+    this.multiplicationService = multiplicationService;
+  }
 
-    @GetMapping("/random")
-    Multiplication getRandomMultiplication() {
-        return multiplicationService.createRandomMultiplication();
-    }
+  @GetMapping("/random")
+  Multiplication getRandomMultiplication() {
+    return multiplicationService.createRandomMultiplication();
+  }
 }

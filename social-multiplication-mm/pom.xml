@@ -24,6 +24,12 @@
     <module>microservices.book.services</module>
     <module>microservices.book.persistent</module>
     <module>microservices.book.controllers</module>
+    <module>microservices.book.database.jpa</module>
+    <module>microservices.book.eclipselink.autoconfiguration</module>
+    <module>microservices.book.hibernate.autoconfiguration</module>
+    <module>
+      microservices.book.hibernate.springlocal.autoconfiguration
+    </module>
   </modules>
   
 </project>
