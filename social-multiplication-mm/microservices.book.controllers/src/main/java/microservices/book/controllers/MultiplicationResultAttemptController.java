@@ -20,37 +20,33 @@ import microservices.book.api.services.multiplication.MultiplicationService;
 @RequestMapping("/results")
 final class MultiplicationResultAttemptController {
 
-    private final MultiplicationService multiplicationService;
+  private final MultiplicationService multiplicationService;
 
-    @Autowired
-    MultiplicationResultAttemptController(final MultiplicationService multiplicationService) {
-        this.multiplicationService = multiplicationService;
+  @Autowired
+  MultiplicationResultAttemptController(final MultiplicationService multiplicationService) {
+    this.multiplicationService = multiplicationService;
+  }
+
+  @PostMapping
+  ResponseEntity<ResultResponse> postResult(@RequestBody MultiplicationAttempt attempt) {
+    return ResponseEntity.ok(new ResultResponse(multiplicationService.checkAttempt(attempt)));
+  }
+
+  static final class ResultResponse {
+
+    private final boolean correct;
+
+    ResultResponse(boolean correct) {
+      this.correct = correct;
     }
 
-    @PostMapping
-    ResponseEntity<ResultResponse> postResult(
-            @RequestBody MultiplicationAttempt attempt) {
-        return ResponseEntity.ok(
-                new ResultResponse(
-                        multiplicationService.checkAttempt(attempt)));
+    public boolean isCorrect() {
+      return correct;
     }
+  }
 
-    static final class ResultResponse {
-
-        private final boolean correct;
-
-        ResultResponse(boolean correct) {
-            this.correct = correct;
-        }
-
-        public boolean isCorrect() {
-            return correct;
-        }
-    }
-
-    @GetMapping
-    ResponseEntity<List<MultiplicationStatistic>> getStatistics(
-            @RequestParam("alias") String alias) {
-        return ResponseEntity.ok(multiplicationService.getStatsForUser(alias));
-    }
+  @GetMapping
+  ResponseEntity<List<MultiplicationStatistic>> getStatistics(@RequestParam("alias") String alias) {
+    return ResponseEntity.ok(multiplicationService.getStatsForUser(alias));
+  }
 }
